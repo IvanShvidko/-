@@ -9,26 +9,30 @@ bot.setMyCommands([
     {command: '/creator', description: 'Создатель'},
 ])
 
-bot.on
-('message', async msg => {
-    const text = msg.text;
-    const chatId = msg.chat.id;
+bot.onText(/\/help/, async (msg) => 
+{
+  console.log(msg);
+  const chatId = msg.chat.id;
+  await bot.sendMessage(chatId, 'Список всех команд: \n/start - Начало диалога;\n/help - Список команд;\n/site - Ссылка на сайт Октагона;\n/creator - Создатель;');
+});
 
-    if (text === '/help') 
-    {
-        return bot.sendMessage(chatId, 'Список всех команд: \n/start - Начало диалога;\n/help - Список команд;\n/site - Ссылка на сайт Октагона;\n/creator - Создатель;');
-    }
-    if (text === '/start') 
-    {
-        return bot.sendMessage(chatId, 'Здравствуй! Меня зовут Окта!\nВсе команды ты можешь посмотреть по ссылке /help');
-    }
-    if (text === '/site') 
-    {
-        return bot.sendMessage(chatId, 'Ссылка на сайт Октагона: https://students.forus.ru/');
-    }
-    if (text === '/creator') 
-    {
-        return bot.sendMessage(chatId, 'Моего создателя зовут:\nШвидко Иван Анатольевич\n@ivanshvidko');
-    }
-    return bot.sendMessage(chatId, 'Я не знаю такой команды, попробуй еще раз!');
-})
+bot.onText(/\/start/, async (msg) => 
+{
+  console.log(msg);
+  const chatId = msg.chat.id;
+  await bot.sendMessage(chatId, 'Здравствуй! Меня зовут Окта!\nВсе команды ты можешь посмотреть по ссылке /help');
+});
+
+bot.onText(/\/site/, async (msg) => 
+{
+  console.log(msg);
+  const chatId = msg.chat.id;
+  await bot.sendMessage(chatId, 'Ссылка на сайт Октагона: https://students.forus.ru/');
+});
+
+bot.onText(/\/creator/, async (msg) => 
+{
+  console.log(msg);
+  const chatId = msg.chat.id;
+  await bot.sendMessage(chatId, 'Моего создателя зовут:\nШвидко Иван Анатольевич\n@ivanshvidko');
+});
