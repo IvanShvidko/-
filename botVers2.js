@@ -86,7 +86,7 @@ bot.onText(/\/deleteItem (.+)/, (msg, match) =>
     } 
     else 
     {
-      bot.sendMessage(chatId, 'Ошибка! Такого предмета не существует в базе!');
+      bot.sendMessage(chatId, 'Ошибка! Таких данных не существует в базе!');
     }
   });
 });
