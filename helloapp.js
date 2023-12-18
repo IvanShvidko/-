@@ -1,27 +1,36 @@
 const express = require("express");
-  
 const app = express();
-app.use("/static", function(request, response){
-    response.send(`header: Hello</p>body: Octagon NodeJS Test`);
-});
 
-app.use("/dynamic", function(request, response){
-    const a = request.query.a;
-    const b = request.query.b;
-    const c = request.query.c;
-    const body = a*b*c/3;
-    if(a==="",b==="",c==="")
-     {
-        response.send(`header: Error</p>body: ${body}</p>`);  
-     }
-     else
-     {
-        const a = request.query.a;
-        const b = request.query.b;
-        const c = request.query.c;
-        const body = a*b*c/3;
-        response.send(`header: Calculated</p>body: ${body}</p>`);  
-     }
+app.use
+(
+    "/static", function(request, response)
+    {
+        response.send(`header: Hello</p>body: Octagon NodeJS Test`);
+    }
+);
+
+app.use("/dynamic", function(request, response) 
+{
+    let a = request.query.a;
+    let b = request.query.b;
+    let c = request.query.c;
+    let isError = false;
+  
+    for (let property in request.query) {
+      if (isNaN(request.query[property])) {
+        isError = true;
+        break;
+      }
+    }
+    if (isError || !a || !b || !c) 
+    {
+        return response.send(`header: Error</p>body: ${body}</p>`);
+    } 
+    else 
+    {
+        let result = (parseInt(a) * parseInt(b) * parseInt(c)) / 3;
+        return response.send(`header: Calculated</p>body: ${result}</p>`);
+    }
 });
  
 app.listen(3000);
